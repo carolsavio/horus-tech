@@ -5,6 +5,8 @@
 # TCC - Arquitetura AWS
 # Uso: ./stress.sh <URL> <usuarios> <duracao_segundos>
 # Ex:  ./stress.sh http://meu-alb.amazonaws.com 200 60
+
+cat <<'EOF'
 # =============================================================================
 # =============================================================================
 #   ███████╗████████╗██████╗ ███████╗███████╗███████╗
@@ -22,12 +24,20 @@
 #      ╚═╝   ╚══════╝╚══════╝   ╚═╝
 # =============================================================================
 # =============================================================================
+EOF
 
-URL="${1:?Informe a URL}"
-USUARIOS="${2:-50}"
-DURACAO="${3:-30}"
 
-echo "Iniciando stress: $USUARIOS usuarios por ${DURACAO}s -> $URL"
+echo
+echo "=== Configuração do Teste ==="
+read -rp "URL do sistema: " URL
+read -rp "Quantidade de usuários simultâneos [50]: " USUARIOS
+read -rp "Duração do teste em segundos [30]: " DURACAO
+
+USUARIOS=${USUARIOS:-50}
+DURACAO=${DURACAO:-30}
+
+echo
+echo "Iniciando stress: $USUARIOS usuários por ${DURACAO}s -> $URL"
 echo "timestamp,status,tempo_ms" > resultado.csv
 
 FIM=$(( $(date +%s) + DURACAO ))
