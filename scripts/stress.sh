@@ -2,9 +2,7 @@
 # =============================================================================
 # horus_tech_stress_test.sh
 # Simulador de acessos de alunos para teste
-# TCC - Arquitetura AWS
-# Uso: ./stress.sh <URL> <usuarios> <duracao_segundos>
-# Ex:  ./stress.sh http://meu-alb.amazonaws.com 200 60
+# Tem performado melhor que o userdata.sh
 
 cat <<'EOF'
 # =============================================================================

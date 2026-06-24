@@ -1,1 +1,29 @@
 *.csv
+# Arquivos de estado local e backups do Terraform
+*.tfstate
+*.tfstate.*
+*.backup
+*.tfvars
+*.tfvars.json
+
+# Diretório local de plugins/provedores e módulos (baixados pelo terraform init)
+.terraform/
+.terraform.lock.hcl
+
+# Arquivos de log gerados localmente
+*.log
+crash.log
+
+# Configurações do override do Terraform
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Arquivos de ambiente e sensíveis
+.env
+secret.tfvars
+
+# Arquivos de histórico do console interativo
+.terraformrc
+terraform.tfstatebackup

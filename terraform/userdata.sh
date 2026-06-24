@@ -14,19 +14,6 @@ fi
 cat > /etc/sudoers.d/apache-stress <<EOF
 apache ALL=(root) NOPASSWD: $STRESS_NG_BIN, /usr/bin/kill
 EOF
-#--------------------------------------------------------
-# o techo -> apache ALL=(root) NOPASSWD: stress-ng, /usr/bin/kill
-# está propositalmente desprotegido a fim de testes
-#
-#NOTA DE SEGURANÇA (AMBIENTE DE TCC)
-#
-#Este projeto foi desenvolvido para fins acadêmicos e de laboratório em AWS, priorizando #demonstração de Auto Scaling, HA e testes de carga.
-#
-#- IMDS (169.254.169.254) é usado para metadados da instância EC2 e não é acessível #externamente, mas requer cuidado em aplicações web por risco de SSRF.
-#- O usuário apache possui permissões via sudoers para executar stress-ng e kill como root, #apenas para viabilizar testes de carga (não recomendado em produção).
-#- O uso de shell_exec com AWS CLI é simplificado para fins didáticos - em produção #recomenda-se SDKs e validação de entradas.
-#
-#Configuração não é segura para ambiente produtivo.
 
 chmod 440 /etc/sudoers.d/apache-stress
 visudo -cf /etc/sudoers.d/apache-stress

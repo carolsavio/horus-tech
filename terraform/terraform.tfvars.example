@@ -1,0 +1,22 @@
+# Copie para terraform.tfvars e ajuste.
+# Nunca suba terraform.tfvars para o Git (já está no .gitignore).
+
+aws_region   = "us-east-1"
+project_name = "horus-tech"
+environment  = "lab"
+
+# Rede
+vpc_cidr             = "10.0.0.0/16"
+public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
+private_subnet_cidrs = ["10.0.11.0/24", "10.0.12.0/24"]
+availability_zones   = ["us-east-1a", "us-east-1b"]
+
+# EC2 / Auto Scaling
+instance_type        = "t3.micro"
+asg_min_size         = 2
+asg_max_size         = 4
+asg_desired_capacity = 2
+cpu_target_value     = 70
+
+# Logo — prefira hospedar no S3 próprio
+logo_url = "https://i.imgur.com/JDLjQCb.png"
