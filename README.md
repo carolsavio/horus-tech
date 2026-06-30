@@ -59,7 +59,6 @@ Implementar uma arquitetura de hospedagem institucional utilizando serviços da 
 |---|---|
 | Haroldo | Lider Técnico |
 | Marcelo | Arquiteto |
-| Lucas C. | Arquiteto |
 | Caroline | Desenvolvedora |
 | Denise | Desenvolvedora |
 | Jessica | Desenvolvedora |
