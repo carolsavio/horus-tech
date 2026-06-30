@@ -18,7 +18,7 @@ Projeto desenvolvido como parte do Trabalho de Conclusão de Curso (TCC), com o 
 A solução foi projetada para atender períodos de tráfego constante e picos súbitos de acessos durante campanhas de marketing, especialmente no lançamento de matrículas.
 
 ---
-
+![Frontend escola tech](docs/images/frontend-escolatech.png)
 ## Contexto do Projeto
 
 A Escola Tech possui uma plataforma de cursos online e está lançando uma nova página de matrículas. O ambiente anterior utilizava apenas um servidor local, o que gerava riscos de indisponibilidade quando muitos alunos tentavam acessar o site simultaneamente.
@@ -47,9 +47,9 @@ Implementar uma arquitetura de hospedagem institucional utilizando serviços da 
 ---
 
 
-[Acesse a Arquitura do projeta completo ➔](docs/architecture.md)
+[➔ Acesse a arquitura do projeto completo](docs/architecture.md)
 
-[Dúvidas sobre o projeto? - Acesse o resumo ➔](docs/why-this-architecture.md)
+[➔ Dúvidas sobre o projeto? - Acesse o resumo](docs/why-this-architecture.md)
 
 ---
 ### Autoria do projeto de TCC 

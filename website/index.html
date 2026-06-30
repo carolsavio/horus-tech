@@ -1,11 +1,938 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horus Tech</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escola Tech — Plataforma de Cursos Online</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+  :root {
+    --bg:         #0a0f1e;
+    --bg2:        #111827;
+    --bg3:        #1a2235;
+    --border:     rgba(255,255,255,0.07);
+    --orange:     #f5a623;
+    --orange-dim: #b87a1a;
+    --violet:     #6b4fff;
+    --violet-dim: #4a37b3;
+    --green:      #3ddc84;
+    --text:       #e8eaf0;
+    --text-dim:   #8892a4;
+    --text-muted: #4a5568;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+    background: rgba(10,15,30,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+
+  .nav-logo span { color: var(--orange); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--orange);
+    color: #0a0f1e;
+    border: none;
+    padding: 9px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+
+  .nav-cta:hover { background: #ffcb5e; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(107,79,255,0.15) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(245,166,35,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(107,79,255,0.12);
+    border: 1px solid rgba(107,79,255,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 13px;
+    color: #a99dff;
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 0 rgba(61,220,132,0.5);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(61,220,132,0.5); }
+    70%  { box-shadow: 0 0 0 8px rgba(61,220,132,0); }
+    100% { box-shadow: 0 0 0 0 rgba(61,220,132,0); }
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    max-width: 900px;
+  }
+
+  .hero h1 .accent { color: var(--orange); }
+
+  .hero p {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--text-dim);
+    max-width: 580px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 60px;
+  }
+
+  .btn-primary {
+    background: var(--orange);
+    color: #0a0f1e;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: #ffcb5e; transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.04); }
+
+  /* VAGAS — ASSINATURA UNICA */
+  .vagas-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 28px;
+    max-width: 460px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .vagas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .vagas-label { font-size: 13px; color: var(--text-dim); }
+  .vagas-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--orange);
+  }
+
+  .vagas-bar-wrap {
+    height: 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .vagas-bar {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--violet), var(--orange));
+    animation: fillBar 2.5s ease-out forwards;
+  }
+
+  @keyframes fillBar {
+    from { width: 0%; }
+    to   { width: 73%; }
+  }
+
+  .vagas-footer {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .vagas-footer .urgente { color: var(--orange); font-weight: 600; }
+
+  /* STATS */
+  .stats {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 5%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    text-align: center;
+  }
+
+  .stat-item {}
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .stat-label { font-size: 14px; color: var(--text-dim); }
+
+  /* SECTION SHARED */
+  .section {
+    padding: 96px 5%;
+  }
+
+  .section-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    max-width: 600px;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--text-dim);
+    max-width: 520px;
+    margin-bottom: 56px;
+    line-height: 1.7;
+  }
+
+  /* CURSOS */
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .course-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .course-card:hover {
+    border-color: rgba(107,79,255,0.4);
+    transform: translateY(-4px);
+  }
+
+  .course-thumb {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    position: relative;
+  }
+
+  .course-thumb.cloud  { background: linear-gradient(135deg, #0f2744, #1a3a6b); }
+  .course-thumb.dev    { background: linear-gradient(135deg, #1a0f35, #2d1a5e); }
+  .course-thumb.data   { background: linear-gradient(135deg, #0f3019, #1a5e30); }
+  .course-thumb.sec    { background: linear-gradient(135deg, #3d1010, #6b1a1a); }
+  .course-thumb.auto   { background: linear-gradient(135deg, #2d1a00, #6b4a00); }
+  .course-thumb.ai     { background: linear-gradient(135deg, #1a0f3d, #2d1a6b); }
+
+  .course-badge {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: var(--orange);
+    color: #0a0f1e;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .course-body { padding: 20px; }
+  .course-tag {
+    font-size: 11px;
+    color: var(--violet);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .course-name {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .course-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .course-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .course-duration { font-size: 12px; color: var(--text-muted); }
+  .course-price { font-weight: 700; font-size: 16px; color: var(--orange); }
+
+  /* DEPOIMENTOS */
+  .testimonials { background: var(--bg2); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .testimonial-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .testimonial-text {
+    font-size: 15px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .testimonial-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .av-a { background: rgba(107,79,255,0.2); color: #a99dff; }
+  .av-b { background: rgba(245,166,35,0.2); color: var(--orange); }
+  .av-c { background: rgba(61,220,132,0.2); color: var(--green); }
+
+  .testimonial-name { font-weight: 600; font-size: 14px; }
+  .testimonial-role { font-size: 12px; color: var(--text-muted); }
+
+  /* MATRICULA CTA */
+  .cta-section {
+    text-align: center;
+    padding: 96px 5%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(107,79,255,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .cta-section p {
+    font-size: 17px;
+    color: var(--text-dim);
+    max-width: 480px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+  }
+
+  /* FORMULARIO */
+  .form-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .form-wrap h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .form-group { margin-bottom: 18px; }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus { border-color: var(--violet); }
+
+  .form-group select option { background: var(--bg3); }
+
+  .form-submit {
+    width: 100%;
+    background: var(--orange);
+    color: #0a0f1e;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+    font-family: inherit;
+  }
+
+  .form-submit:hover { background: #ffcb5e; }
+
+  .form-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 14px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 40px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer .footer-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text);
+  }
+
+  footer .footer-logo span { color: var(--orange); }
+
+  footer p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .aws-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,153,0,0.08);
+    border: 1px solid rgba(255,153,0,0.2);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: #FF9900;
+    font-weight: 600;
+  }
+
+  /* TOAST de matricula */
+  .toast {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--bg2);
+    border: 1px solid var(--green);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: none;
+    align-items: center;
+    gap: 12px;
+    z-index: 999;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    animation: slideIn 0.3s ease;
+    max-width: 320px;
+  }
+
+  .toast.show { display: flex; }
+
+  @keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  .toast-icon { font-size: 22px; }
+  .toast-text { font-size: 14px; color: var(--text); }
+  .toast-text strong { color: var(--green); display: block; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .courses-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .stats { grid-template-columns: 1fr; gap: 24px; }
+    .hero-ctas { flex-direction: column; align-items: center; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
 </head>
 <body>
-    <h1>SITE ONLINE</h1>
+
+<nav>
+  <div class="nav-logo">Escola<span>Tech</span></div>
+  <ul class="nav-links">
+    <li><a href="#cursos">Cursos</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#matricula">Matrícula</a></li>
+  </ul>
+  <a href="#matricula" class="nav-cta">Matricule-se</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Inscrições abertas - Turma 2027</div>
+  <h1>Aprenda tecnologia<br>e <span class="accent">transforme</span> sua carreira</h1>
+  <p>Cursos de Cloud, Programação, Dados e IA para quem quer entrar no mercado de técnologia com base sólida e emprego garantido.</p>
+  <div class="hero-ctas">
+    <a href="#matricula" class="btn-primary">Garantir minha vaga</a>
+    <a href="#cursos" class="btn-secondary">Ver cursos</a>
+  </div>
+  <div class="vagas-card">
+    <div class="vagas-header">
+      <span class="vagas-label">Vagas preenchidas - Turma Cloud AWS</span>
+      <span class="vagas-num" id="vagas-count">0</span>
+    </div>
+    <div class="vagas-bar-wrap">
+      <div class="vagas-bar"></div>
+    </div>
+    <div class="vagas-footer">
+      <span>500 vagas totais</span>
+      <span class="urgente" id="vagas-restantes">carregando...</span>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat-item">
+    <span class="stat-num" id="stat-alunos">0</span>
+    <span class="stat-label">Alunos formados</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" id="stat-cursos">0</span>
+    <span class="stat-label">Cursos disponíveis</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" id="stat-emprego">0%</span>
+    <span class="stat-label">Taxa de empregabilidade</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" id="stat-nota">0</span>
+    <span class="stat-label">Avaliação media (5.0)</span>
+  </div>
+</div>
+
+<section class="section" id="cursos">
+  <div class="section-eyebrow">Cursos</div>
+  <h2 class="section-title">Do zero ao mercado de trabalho</h2>
+  <p class="section-sub">Todos os cursos com projeto prático, mentoria ao vivo e certificado reconhecido pelo mercado.</p>
+  <div class="courses-grid">
+    <div class="course-card">
+      <div class="course-thumb cloud">
+        <div class="course-badge">Mais popular</div>
+        ☁️
+      </div>
+      <div class="course-body">
+        <div class="course-tag">Cloud Computing</div>
+        <div class="course-name">AWS Solutions Architect</div>
+        <div class="course-desc">Projete e implemente arquiteturas na AWS do zero. ALB, Auto Scaling, VPC, RDS, IAM e muito mais.</div>
+        <div class="course-footer">
+          <span class="course-duration">6 meses · Online ao vivo</span>
+          <span class="course-price">R$ 1.497</span>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-thumb dev">💻</div>
+      <div class="course-body">
+        <div class="course-tag">Desenvolvimento</div>
+        <div class="course-name">Full Stack com Python e React</div>
+        <div class="course-desc">Desenvolvimento web completo, do backend com Django até o frontend moderno com React e TypeScript.</div>
+        <div class="course-footer">
+          <span class="course-duration">8 meses · Online ao vivo</span>
+          <span class="course-price">R$ 1.797</span>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-thumb data">📊</div>
+      <div class="course-body">
+        <div class="course-tag">Dados</div>
+        <div class="course-name">Engenharia de Dados</div>
+        <div class="course-desc">Pipelines de dados, datalakes na AWS, Spark, Airflow e visualizaç~o com Power BI e Metabase.</div>
+        <div class="course-footer">
+          <span class="course-duration">6 meses · Online ao vivo</span>
+          <span class="course-price">R$ 1.597</span>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-thumb sec">🔐</div>
+      <div class="course-body">
+        <div class="course-tag">Segurança</div>
+        <div class="course-name">Cybersecurity & Cloud Security</div>
+        <div class="course-desc">Seguranca ofensiva e defensiva, IAM avancado, WAF, SIEM e preparação para certificações.</div>
+        <div class="course-footer">
+          <span class="course-duration">5 meses · Online ao vivo</span>
+          <span class="course-price">R$ 1.397</span>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-thumb auto">
+        <div class="course-badge">Novo</div>
+        ⚙️
+      </div>
+      <div class="course-body">
+        <div class="course-tag">DevOps</div>
+        <div class="course-name">DevOps com Terraform e Kubernetes</div>
+        <div class="course-desc">Infraestrutura como codigo, CI/CD, containers, Kubernetes e observabilidade em produção.</div>
+        <div class="course-footer">
+          <span class="course-duration">6 meses · Online ao vivo</span>
+          <span class="course-price">R$ 1.697</span>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-thumb ai">
+        <div class="course-badge">Em breve</div>
+        🤖
+      </div>
+      <div class="course-body">
+        <div class="course-tag">Inteligencia Artificial</div>
+        <div class="course-name">IA Generativa com AWS Bedrock</div>
+        <div class="course-desc">LLMs, RAG, embeddings, fine-tuning e construção de aplicações com IA generativa na AWS.</div>
+        <div class="course-footer">
+          <span class="course-duration">4 meses · Online ao vivo</span>
+          <span class="course-price">Em breve</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section testimonials" id="depoimentos">
+  <div class="section-eyebrow">Depoimentos</div>
+  <h2 class="section-title">Quem estudou aqui</h2>
+  <p class="section-sub">Mais de 12.000 alunos formados. Veja o que eles falam.</p>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-text">"Entrei sem saber nada de tecnologia. Em 6 meses já tinha passado no processo seletivo da AWS como Solutions Architect. A didática e diferente de qualquer outro curso que ja fiz."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar av-a">R</div>
+        <div>
+          <div class="testimonial-name">Rafaela Costa</div>
+          <div class="testimonial-role">Cloud Architect · Amazon Web Services</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-text">"O curso de DevOps mudou minha carreira. Estava ganhando R$ 2.800 como suporte e hoje ganho R$ 11.000 como SRE. Valeu cada centavo. O projeto final do Terraform me ajudou muito nas entrevistas."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar av-b">M</div>
+        <div>
+          <div class="testimonial-name">Marcelo Lima</div>
+          <div class="testimonial-role">Site Reliability Engineer · Nubank</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-text">"Como mulher migrando de outra área, tinha muito medo. A comunidade da Escola Tech e incrível. As mentorias ao vivo resolveram todas as minhas dúvidas. Hoje trabalho em uma startup de IA em São Paulo."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar av-c">J</div>
+        <div>
+          <div class="testimonial-name">Juliana Ferreira</div>
+          <div class="testimonial-role">ML Engineer · Startup de IA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="matricula">
+  <div class="section-eyebrow">Matricula</div>
+  <h2>Comece sua jornada<br>na tecnologia agora</h2>
+  <p>Vagas limitadas por turma. Garanta a sua antes que fechem.</p>
+  <div class="form-wrap">
+    <h3>Formulário de Matrícula</h3>
+    <div class="form-group">
+      <label>Nome completo</label>
+      <input type="text" id="f-nome" placeholder="Seu nome completo">
+    </div>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input type="email" id="f-email" placeholder="seuemail@exemplo.com">
+    </div>
+    <div class="form-group">
+      <label>Telefone</label>
+      <input type="tel" id="f-tel" placeholder="(11) 99999-9999">
+    </div>
+    <div class="form-group">
+      <label>Curso de interesse</label>
+      <select id="f-curso">
+        <option value="">Selecione um curso</option>
+        <option>AWS Solutions Architect</option>
+        <option>Full Stack com Python e React</option>
+        <option>Engenharia de Dados</option>
+        <option>Cybersecurity & Cloud Security</option>
+        <option>DevOps com Terraform e Kubernetes</option>
+      </select>
+    </div>
+    <button class="form-submit" onclick="matricular()">Garantir minha vaga agora</button>
+    <p class="form-note">Ao se inscrever, você concorda com nossos termos de uso. Sem spam.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Escola<span>Tech</span></div>
+  <p>© 2025 Escola Tech - Plataforma de Cursos Online. Todos os direitos reservados.</p>
+  <div class="aws-badge">Hospedado na AWS · Alta disponibilidade</div>
+</footer>
+
+<div class="toast" id="toast">
+  <span class="toast-icon">🎉</span>
+  <div class="toast-text">
+    <strong>Pré-matrícula realizada!</strong>
+    Entraremos em contato em breve.
+  </div>
+</div>
+
+<script>
+// Contador de vagas animado
+(function(){
+  var target = 365;
+  var el = document.getElementById('vagas-count');
+  var rest = document.getElementById('vagas-restantes');
+  var current = 0;
+  var step = Math.ceil(target / 60);
+  var t = setInterval(function(){
+    current = Math.min(current + step, target);
+    el.textContent = current;
+    rest.textContent = (500 - current) + ' vagas restantes';
+    if(current >= target) clearInterval(t);
+  }, 30);
+})();
+
+// Contadores de stats
+function animateCount(id, target, suffix, decimals) {
+  var el = document.getElementById(id);
+  var start = 0;
+  var duration = 1800;
+  var startTime = null;
+  function step(ts) {
+    if(!startTime) startTime = ts;
+    var progress = Math.min((ts - startTime) / duration, 1);
+    var ease = 1 - Math.pow(1 - progress, 3);
+    var val = start + (target - start) * ease;
+    el.textContent = decimals ? val.toFixed(1) + suffix : Math.round(val) + suffix;
+    if(progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+var statsObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      animateCount('stat-alunos', 12847, '+', false);
+      animateCount('stat-cursos', 6, '', false);
+      animateCount('stat-emprego', 94, '%', false);
+      animateCount('stat-nota', 4.9, '', true);
+      statsObserver.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+
+statsObserver.observe(document.querySelector('.stats'));
+
+// Formulario de matricula
+function matricular() {
+  var nome = document.getElementById('f-nome').value.trim();
+  var email = document.getElementById('f-email').value.trim();
+  var curso = document.getElementById('f-curso').value;
+
+  if(!nome || !email || !curso) {
+    alert('Preencha nome, e-mail e curso para continuar.');
+    return;
+  }
+
+  var toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(function(){ toast.classList.remove('show'); }, 4000);
+
+  // Simula reducao de vagas
+  var vagasEl = document.getElementById('vagas-count');
+  var restEl  = document.getElementById('vagas-restantes');
+  var atual = parseInt(vagasEl.textContent);
+  vagasEl.textContent = atual + 1;
+  restEl.textContent  = (500 - atual - 1) + ' vagas restantes';
+}
+</script>
+
 </body>
 </html>
