@@ -6,7 +6,7 @@
 <!-- TCC -->
 [![TCC](https://img.shields.io/badge/TCC-Projeto%20Final-F5A623?style=for-the-badge&logo=academia&logoColor=white)]()
 [![Escola%20Tech](https://img.shields.io/badge/Cliente-Escola%20Tech-6B4FFF?style=for-the-badge&logo=bookstack&logoColor=white)]()
-[![Horus%20Tech](https://img.shields.io/badge/Horus%20Tech-Solucao%20em%20Nuvem-1a2235?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSI0IiBmaWxsPSIjZjVhNjIzIi8+PHBhdGggZD0iTTIgMjBhMTAgMTAgMCAwIDEgMjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNmI0ZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48L3N2Zz4=&logoColor=F5A623)
+![Horus%20Tech](https://img.shields.io/badge/Horus%20Tech-Solucao%20em%20Nuvem-1a2235?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSI0IiBmaWxsPSIjZjVhNjIzIi8+PHBhdGggZD0iTTIgMjBhMTAgMTAgMCAwIDEgMjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNmI0ZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48L3N2Zz4=&logoColor=F5A623)
 [![AWS](https://img.shields.io/badge/Amazon%20AWS-Cloud%20Provider-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/)
 [![IaC](https://img.shields.io/badge/IaC-Infrastructure%20as%20Code-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)]()
 [![License](https://img.shields.io/badge/Licenca-MIT-3DDC84?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
@@ -47,14 +47,24 @@ Implementar uma arquitetura de hospedagem institucional utilizando serviços da 
 ---
 
 
-[Acesse a Arquitura do projeta completo](docs/architecture.md)
+[Acesse a Arquitura do projeta completo ➔](docs/architecture.md)
 
-Autoria ---
+[Dúvidas sobre o projeto? - Acesse o resumo ➔](docs/why-this-architecture.md)
 
-Nome dos alunos: Caroline S, Denise G, Lucas C Haroldo Jr, Marcelo C, Mirelle E, Jessica G
+---
+### Autoria do projeto de TCC 
 
-Curso: AWS ReStart
 
-Instituição: Escola da Nuvem
+| Nome | Papel |
+|---|---|
+| Haroldo | Lider Técnico |
+| Marcelo | Arquiteto |
+| Lucas C. | Arquiteto |
+| Caroline | Desenvolvedora |
+| Denise | Desenvolvedora |
+| Jessica | Desenvolvedora |
+| Mirele | Scrum Master |
 
-Ano: 2026
+- **Curso:** AWS ReStart
+- **Instituição:** Escola da Nuvem
+- **Ano:** 2026
