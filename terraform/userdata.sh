@@ -1,4 +1,7 @@
 #!/bin/bash
+# FALTAM AJUSTES PARA FUNCIONAR 100%
+
+
 set -e
 
 yum update -y
