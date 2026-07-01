@@ -95,19 +95,6 @@ Para demonstrar o failover no TCC:
 
 ---
 
-## Destruindo a infraestrutura
-
-```bash
-# IMPORTANTE: o RDS tem deletion_protection = true por seguranca
-# Para destruir, primeiro desative no console AWS ou via:
-terraform apply -target=aws_db_instance.main -var="deletion_protection=false"
-
-# Depois destrua tudo
-terraform destroy
-```
-
----
-
 ## Roadmap — Evolucao futura
 
 A arquitetura foi projetada para crescer. As proximas camadas planejadas:
