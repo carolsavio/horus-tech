@@ -47,7 +47,7 @@ Implementar uma arquitetura de hospedagem institucional utilizando serviços da 
 ---
 
 
-[➔ Acesse a arquitura do projeto completo](docs/architecture.md)
+[➔ Acesse a arquitetura do projeto completo](docs/architecture.md)
 
 [➔ Dúvidas sobre o projeto? - Acesse o resumo](docs/why-this-architecture.md)
 
